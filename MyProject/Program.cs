@@ -24,12 +24,18 @@ builder.Services.AddAuthentication(options =>
 .AddIdentityCookies();
 
 builder.Services.AddDbContext<DatabaseContext>();
-
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddScoped<DatabaseSeeder>();
+builder.Services.AddIdentityCore<Account>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddSignInManager();
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetService<DatabaseSeeder>();
+await seeder!.Seed();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
