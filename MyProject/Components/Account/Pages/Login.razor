@@ -9,6 +9,7 @@
 @inject ILogger<Login> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
+@inject UserManager<Model.Account> UserManager
 
 <PageTitle>Log in</PageTitle>
 <StatusMessage Message="@statusMessage" IsError="@isError" />
@@ -62,19 +63,25 @@
 
     public async Task LoginUser()
     {
+
+        var user = await UserManager.FindByEmailAsync(Model.Email);
+        if (user != null)
+        {
+            var signinresult = await SignInManager.PasswordSignInAsync(user, Model.Password, false, false);
+            if (signinresult.Succeeded)
+            {
+                RedirectManager.RedirectTo(ReturnUrl);
+                return;
+            }
+            else
+            {
+                statusMessage = "Invalid login attempt.";
+                isError = true;
+            }
+        }
         // This doesn't count login failures towards account lockout
         // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-        var result = await SignInManager.PasswordSignInAsync(Model.Email, Model.Password, false, lockoutOnFailure: false);
-        if (result.Succeeded)
-        {
-            Logger.LogInformation("User logged in.");
-            RedirectManager.RedirectTo(ReturnUrl);
-        }
-        else
-        {
-            statusMessage = "Invalid login attempt.";
-            isError = true;
-        }
+        
     }
 
     private sealed class LoginModel

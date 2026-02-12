@@ -25,8 +25,16 @@
         <EditForm OnValidSubmit="RegisterUser" Model="Model" FormName="registerForm">
             <div class="row g-3">
                 <div class="col-md-12">
+                    <label for="profilepicture" class="form-label"> Profile Picture</label>
+                    <InputText class="form-control" placeholder="Profilepicture" @bind-Value="Model.ProfilePicture" />
+                </div>
+                <div class="col-md-12">
                     <label for="email" class="form-label">Email</label>
                     <InputText class="form-control" placeholder="Email" @bind-Value="Model.Email" />
+                </div>
+                <div class="col-md-12">
+                    <label for="username" class="form-label">Username</label>
+                    <InputText class="form-control" placeholder="UserName" @bind-Value="Model.UserName" />
                 </div>
                 <div class="col-md-6">
                     <label for="password" class="form-label">Password</label>
@@ -58,10 +66,14 @@
 
     public async Task RegisterUser(EditContext editContext)
     {
-        var user = Activator.CreateInstance<Model.Account>(); ;
-        await UserStore.SetUserNameAsync(user, Model.Email, CancellationToken.None);
-        var emailStore = (IUserEmailStore<Model.Account>)UserStore;
-        await emailStore.SetEmailAsync(user, Model.Email, CancellationToken.None);
+        var user = new Model.Account
+            {
+                UserName = Model.UserName,
+                Email = Model.Email,
+                ProfilePicture = Model.ProfilePicture,
+                NumberOfListings = 0
+            };
+
         var result = await UserManager.CreateAsync(user, Model.Password);
 
         if (!result.Succeeded)
@@ -81,10 +93,22 @@
 
     private sealed class RegisterModel
     {
+        [Required(ErrorMessage = "Please enter your email.")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         public string Email { get; set; } = "";
 
+        [Required(ErrorMessage = "Please enter a password.")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = "";
 
+        [Required(ErrorMessage = "Please confirm your password.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your username.")]
+        public string UserName { get; set; } = "";
+
+        public string ProfilePicture { get; set; } = "";
     }
 }
