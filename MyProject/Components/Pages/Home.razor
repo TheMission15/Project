@@ -1,6 +1,18 @@
 ﻿@page "/"
+@using MyProject.Context
+@using MyProject.Model
+
+@inject ListingProvider ListingProvider
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
+@code{
+    private IEnumerable<Listing> listings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listings = await ListingProvider.GetAllListingsAsync();
+    }
+}

@@ -1,4 +1,5 @@
-﻿using MyProject.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using MyProject.Model;
 
 namespace MyProject.Context
 {
