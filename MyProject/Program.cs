@@ -25,6 +25,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddScoped<DatabaseSeeder>();
+builder.Services.AddScoped<ListingProvider>();
 builder.Services.AddIdentityCore<Account>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddSignInManager();
