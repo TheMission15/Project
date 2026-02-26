@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyProject.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,7 @@ namespace MyProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "TEXT", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "TEXT", nullable: true),
                     NumberOfListings = table.Column<int>(type: "INTEGER", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -60,9 +60,9 @@ namespace MyProject.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatorId = table.Column<int>(type: "INTEGER", nullable: false),
                     PokemonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ListingIMG = table.Column<string>(type: "TEXT", nullable: false),
+                    ListingIMG = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<double>(type: "REAL", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
                     Views = table.Column<int>(type: "INTEGER", nullable: false),
                     UploadDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -95,7 +95,7 @@ namespace MyProject.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Type1 = table.Column<int>(type: "INTEGER", nullable: false),
-                    Type2 = table.Column<int>(type: "INTEGER", nullable: false)
+                    Type2 = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

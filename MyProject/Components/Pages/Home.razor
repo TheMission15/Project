@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using MyProject.Components.Shared
 @using MyProject.Context
 @using MyProject.Model
 
@@ -8,6 +9,19 @@
 
 <h1>Hello, world!</h1>
 
+GetPokemon
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+@foreach (var listing in listings)
+{
+    <div class="col">
+        <StoreItem Listing="listing" />
+    </div>
+}
+@if (!listings.Any())
+{
+    <p>No listings available.</p>
+}
+</div>
 @code{
     private IEnumerable<Listing> listings;
 

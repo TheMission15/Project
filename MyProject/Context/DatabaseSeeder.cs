@@ -62,9 +62,19 @@ namespace MyProject.Context
         {
             CreatorId = 1,
             PokemonId = 25,
-            ListingIMG = "pikachu.png",
+            ListingIMG = "https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png",
             Price = 45.99,
             Description = "Well-trained Pikachu with solid stats. Friendly and reliable.",
+            Views = 0,
+            UploadDate = DateTime.UtcNow.AddDays(-2)
+        },
+        new Listing
+        {
+            CreatorId = 1,
+            PokemonId = 151,
+            ListingIMG = "https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png",
+            Price = 45.99,
+            Description = "just a pokemon i caught the other day",
             Views = 0,
             UploadDate = DateTime.UtcNow.AddDays(-2)
         },

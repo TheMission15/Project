@@ -11,8 +11,8 @@ using MyProject.Context;
 namespace MyProject.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260212085336_init")]
-    partial class init
+    [Migration("20260224085538_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,7 +194,6 @@ namespace MyProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
@@ -229,11 +228,9 @@ namespace MyProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ListingIMG")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PokemonId")
@@ -290,7 +287,7 @@ namespace MyProject.Migrations
                     b.Property<int>("Type1")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Type2")
+                    b.Property<int?>("Type2")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("PokemonId");
