@@ -12,7 +12,10 @@ namespace MyProject.Context
         }
         public async Task<List<Listing>> GetAllListingsAsync()
         {
-            return await _context.Listings.OrderBy(listing => listing.UploadDate).ToListAsync();
+
+            return await _context.Listings
+                .Include(l => l.Pokemon)
+                .OrderBy(listing => listing.UploadDate).ToListAsync();
         }
         public Listing? GetListing(int id)
         {

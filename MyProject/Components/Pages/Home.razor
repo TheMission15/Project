@@ -7,9 +7,6 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
-
-GetPokemon
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
 @foreach (var listing in listings)
 {
@@ -29,4 +26,5 @@ GetPokemon
     {
         listings = await ListingProvider.GetAllListingsAsync();
     }
+
 }

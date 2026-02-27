@@ -19,6 +19,10 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+
+                <!--  This allows the NavBar to look different depending on weather a user is Autharized or not aka logged in
+                    if yes, it displayes their username and an option to log out, otherwise it asks them to log in or register  -->
+
                 <AuthorizeView>
                     <Authorized>
                         <li class="navbar-text"> @context.User.Identity?.Name </li>

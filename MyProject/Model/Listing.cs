@@ -12,5 +12,6 @@
         public DateTime UploadDate { get; set; }
         public Pokemon Pokemon { get;set; }
 
+
     }
 }
