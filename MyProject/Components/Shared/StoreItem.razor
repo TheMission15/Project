@@ -3,11 +3,13 @@
 
 @inject ProtectedSessionStorage ProtectedSessionStorage
 
+<!--This is the code for one single listing, with its dimentions and styling-->
 <div clss="card h-100">
     <img src="/img/listings/@Listing.ListingIMG" class="card-img-top p-1" onerror="this.onerror = null; this.src='/github-mark.png'">
     <h5 class="card-title">@Listing.Pokemon.Name</h5>
     <div class="card-body d-flex flex-column darker-border-checkbox">
         <h5>
+            <!--This uses the type of the pokemon to show a different colour depending on the type of the pokemon, -->
             <span class="badge @GetTypeClass(@Listing.Pokemon.Type1)">@Listing.Pokemon.Type1</span>
             <span class="badge @GetTypeClass(@Listing.Pokemon.Type2)">@Listing.Pokemon.Type2</span>
         </h5>
@@ -15,6 +17,7 @@
             <h5 class="card-title">@Listing.Description</h5>
         </div>
         <div class="card-text">Seller name</div>
+        <!--This button here allows users to open the page for the specific listing to view more information-->
         <button class="btn btn-primary position-relative w-100">
             <NavLink href="/listing">Open Listing</NavLink>
         </button>
@@ -26,8 +29,8 @@
     [Parameter]
     public Listing Listing { get; set; }
     private int quantity = 1;
-    private string GetTypeClass(PokemonType? type)
-    {
+    private string GetTypeClass(PokemonType? type) // this function is used to get the colour of the badge around the type of the poekemon,
+    {                                           // this is because each type has a different colour.
         if (type != null)
         {
             return $"type-{type.ToString().ToLower()}";
